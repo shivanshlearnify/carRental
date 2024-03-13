@@ -14,7 +14,7 @@ const HeroComponent = () => {
           <div className="font-extrabold text-5xl my-2">
             Save <span className="text-[#ff4d30]">big</span> with our car rental
           </div>
-          <div className="font-medium text-[#706f7b] my-4">
+          <div className="font-medium text-gray-500 my-4">
             Rent the car of your dreams. Unbeatable prices, unlimited miles,
             flexible pick-up options and much more.
           </div>
