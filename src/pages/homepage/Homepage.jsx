@@ -6,16 +6,25 @@ import SloganBanner from "../../components/sloganBanner/SloganBanner";
 import ChooseUs from "../../components/chooseUsSection/ChooseUs";
 import Testimonial from "../../components/testimonial/Testimonial";
 import DownloadSection from "../../components/downloadSection/DownloadSection";
+import { FaCircleArrowUp } from "react-icons/fa6";
+import Faq from "../../components/faq/Faq";
 
 const Homepage = () => {
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <div>
       <HeroComponent />
+      <div className="fixed right-[24px] text-4xl cursor-pointer text-[#ff4d30]" onClick={handleScrollToTop}>
+        <FaCircleArrowUp />
+      </div>
       <Booking />
       <PlanSection />
       <SloganBanner />
       <ChooseUs />
       <Testimonial />
+      <Faq/>
       <DownloadSection />
     </div>
   );

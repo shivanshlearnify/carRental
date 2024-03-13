@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const Navbar = () => {
   const navigate = useNavigate();
   return (
-    <div className="fixed top-0 bg-slate-50/30 w-full z-10">
+    <div className="absolute top-0  w-full z-10">
       <div className="flex max-w-7xl justify-between m-auto p-3 items-center h-24">
         <div
           className="text-4xl font-extrabold text-[#ff4d30] cursor-pointer"

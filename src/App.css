@@ -1,4 +1,20 @@
-*{
-    scrollbar-color: #ff4d30 #fff;
-    scrollbar-width: thin;
+* {
+  scrollbar-color: #ff4d30 #fff;
+  scrollbar-width: thin;
+}
+.active-question {
+  background-color: #ff4d30;
+  color: #fff;
+  transition: 0.15s ease;
+  box-shadow: 0 10px 15px 0 rgb(255 83 48 / 35%);
+}
+.active-answer {
+  max-height: 40rem;
+  padding: 2.8rem 4.5rem;
+  transition: 0.4s ease;
+}
+.answer{
+    height: 1px;
+    overflow: hidden;
+    padding: 0 4.5rem;
 }
