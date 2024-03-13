@@ -10,7 +10,7 @@ const Navbar = () => {
           className="text-4xl font-extrabold text-[#ff4d30] cursor-pointer"
           onClick={() => navigate("/")}
         >
-          Car Rental
+          Car Rentals
         </div>
         <div>
           <ul className="flex gap-4 font-medium cursor-pointer">
