@@ -45,7 +45,7 @@ const Vehicle = () => {
   return (
     <div>
       <HeroBanner name={"Vehicle"} />
-      <div className="max-w-6xl mx-auto p-3 flex flex-wrap gap-12 my-20">
+      <div className="max-w-6xl mx-auto p-3 flex flex-wrap gap-12 my-20 justify-center">
         {data.map((item, index) => (
           <div className="max-w-[528px] w-full rounded-t-md rounded-b-md cursor-pointer shadow-2xl" key={index}>
             <img

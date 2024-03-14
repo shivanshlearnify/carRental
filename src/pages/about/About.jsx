@@ -7,14 +7,14 @@ const About = () => {
   return (
     <div>
         <HeroBanner name={'About'}/>
-        <div className="flex max-w-5xl m-auto gap-10 pt-20">
+        <div className="flex max-w-5xl m-auto gap-10 pt-20 px-3 sm:flex-col">
         <img
-          className="w-1/2 rounded-md"
+          className="w-1/2 rounded-md sm:w-full"
           src="https://www.investopedia.com/thmb/_ZgPLxMwZVDlKmEbARS5bhv4PG0=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/car-dealer-showing-new-car-6938e02d5076488e91d38edb72054770.jpeg"
           alt=""
         />
-        <div className="w-1/2">
-          <h1 className="text-3xl font-bold">About Car Rental</h1>
+        <div className="w-1/2 sm:w-full">
+          <h1 className="text-3xl font-bold sm:text-center">About Car Rental</h1>
           <p className="font-medium text-gray-500 mt-5">
             Car Rental is your premier destination for convenient, reliable, and
             affordable transportation solutions. With a commitment to

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Nopage = () => {
   return (
-    <div className="h-[650px] flex flex-col items-center justify-center text-2xl font-semibold">
+    <div className="h-[650px] flex flex-col items-center justify-center text-2xl font-semibold text-center px-4 gap-4">
       <h1>404 - Page Not Found</h1>
       <p>Oops! It looks like the page you are looking for does not exist.</p>
       <p>

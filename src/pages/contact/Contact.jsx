@@ -6,8 +6,8 @@ const Contact = () => {
   return (
     <div>
       <HeroBanner name={"Contact Page"} />
-      <div className="flex max-w-7xl justify-between m-auto p-3 my-10">
-        <div className="left w-1/3 flex flex-col gap-3">
+      <div className="flex max-w-7xl justify-between m-auto p-3 my-10 md:flex-col sm:flex-col md:gap-8 sm:gap-4">
+        <div className="left w-1/3 flex flex-col gap-3 md:w-full sm:w-full">
           <h2 className="text-4xl font-extrabold">Need additional information?</h2>
           <p className="font-medium text-gray-500 ">
             A multifaceted professional skilled in multiple fields of research,
@@ -18,7 +18,7 @@ const Contact = () => {
           <p className="text-gray-500"><span className="font-bold">Email:-</span>lorem@gmail.com</p>
           <p className="text-gray-500"><span className="font-bold">Location:-</span>Delhi, In</p>
         </div>
-        <div className="right w-[600px] flex flex-col gap-3">
+        <div className="right w-[600px] flex flex-col gap-3 md:mx-auto sm:w-full">
           <label className="text-2xl font-semibold"  htmlFor="">Full Name</label>
           <input className="border py-2 px-3" type="text" placeholder="Enter here"/>
           <label className="text-2xl font-semibold"  htmlFor="">Email Address</label>

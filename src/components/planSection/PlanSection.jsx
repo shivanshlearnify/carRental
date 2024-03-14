@@ -18,7 +18,7 @@ const PlanSection = () => {
         <div className="1 flex flex-col items-center">
           <img className="max-h-[180px] h-full" src={icon1} alt="" />
           <div className="head1 text-2xl font-bold mb-[10px] ">Select Car</div>
-          <div className="head2 text-gray-500 text-center">
+          <div className="head2 text-gray-500 text-center px-2">
             We offers a big range of vehicles for all your driving needs. We
             have the perfect car to meet your needs
           </div>
@@ -28,7 +28,7 @@ const PlanSection = () => {
           <div className="head1 text-2xl font-bold mb-[10px] ">
             Contact Operator
           </div>
-          <div className="head2  text-gray-500 text-center">
+          <div className="head2  text-gray-500 text-center px-2">
             Our knowledgeable and friendly operators are always ready to help
             with any questions or concerns
           </div>
@@ -36,7 +36,7 @@ const PlanSection = () => {
         <div className="1 flex flex-col items-center">
           <img className="max-h-[180px] h-full" src={icon3} alt="" />
           <div className="head1 text-2xl font-bold mb-[10px] ">Let's Drive</div>
-          <div className="head2  text-gray-500 text-center">
+          <div className="head2  text-gray-500 text-center px-2">
             Whether you're hitting the open road, we've got you covered with our
             wide range of cars
           </div>

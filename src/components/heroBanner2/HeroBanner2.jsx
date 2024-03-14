@@ -12,7 +12,7 @@ const HeroBanner2 = () => {
     <div className=" h-[200px] mt-20" style={backgroundStyle}>
       <div className="bg-[#00000048] h-[200px] w-full">
         <div className="max-w-4xl mx-auto pt-20">
-          <h2 className="text-white text-3xl font-bold">
+          <h2 className="text-white text-3xl font-bold sm:text-center">
             Book a car by getting in touch with us{" "}
             <span className="text-[#ff4d30] cursor-pointer">
               {" "}

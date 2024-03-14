@@ -22,7 +22,7 @@ const Ourteam = () => {
   return (
     <div>
       <HeroBanner name={"Our Team"} />
-      <div className="flex flex-wrap max-w-6xl mx-auto gap-10 my-20">
+      <div className="flex flex-wrap max-w-6xl mx-auto gap-10 my-20 px-4">
         {teamPpl.map((ppl, index) => (
           <div
             key={index}
