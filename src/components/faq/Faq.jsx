@@ -25,7 +25,7 @@ const Faq = () => {
     <div style={backgroundStyle}>
       <div className="max-w-3xl mx-auto px-3 flex flex-col items-center gap-3 mb-10">
         <h3 className="text-xl font-bold mt-12">Faq</h3>
-        <h1 className="text-4xl font-bold">Frequently Asked Questions</h1>
+        <h1 className="text-4xl font-bold sm:text-center">Frequently Asked Questions</h1>
         <p className="text-center	text-xl font-medium text-gray-500 ">
           Frequently Asked Questions About the Car Rental Booking Process on Our
           Website: Answers to Common Concerns and Inquiries.

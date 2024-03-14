@@ -17,7 +17,7 @@ const Homepage = () => {
   return (
     <div>
       <HeroComponent />
-      <div className="fixed right-[24px] text-4xl cursor-pointer text-[#ff4d30]" onClick={handleScrollToTop}>
+      <div className="fixed right-[16px] bottom-[40px] text-4xl cursor-pointer text-[#ff4d30]" onClick={handleScrollToTop}>
         <FaCircleArrowUp />
       </div>
       <Booking />

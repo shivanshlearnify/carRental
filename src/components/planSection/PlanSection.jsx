@@ -10,11 +10,11 @@ const PlanSection = () => {
         <div className="head1 text-2xl font-semibold mt-[11rem] ">
           Plan Your Trip now
         </div>
-        <div className="head2 text-5xl font-extrabold mt-[1rem] mb-[3rem] ">
+        <div className="head2 text-5xl font-extrabold mt-[1rem] mb-[3rem] text-center ">
           Quick & easy car rental
         </div>
       </div>
-      <div className="flex gap-[8.25rem] ">
+      <div className="lg:flex gap-[8.25rem] ">
         <div className="1 flex flex-col items-center">
           <img className="max-h-[180px] h-full" src={icon1} alt="" />
           <div className="head1 text-2xl font-bold mb-[10px] ">Select Car</div>

@@ -15,13 +15,13 @@ const ChooseUs = () => {
         <div>
           <img className="w-[100%] m-auto " src={main} alt="" />
         </div>
-        <div className="max-w-5xl m-auto flex gap-[65px] mt-[3.5rem]">
-          <div className="left w-1/2">
+        <div className="max-w-5xl m-auto flex gap-[65px] mt-[3.5rem] sm:flex-col ">
+          <div className="left w-1/2 sm:w-full sm:flex sm:flex-col sm:items-center">
             <p className="text-2xl font-bold mb-3">Why Choose Us</p>
-            <h1 className="text-5xl font-bold">
+            <h1 className="text-5xl font-bold sm:text-center">
               Best valued deals you will ever find
             </h1>
-            <p className="text-gray-500 py-6">
+            <p className="text-gray-500 py-6 sm:text-center">
               Discover the best deals you'll ever find with our unbeatable
               offers. We're dedicated to providing you with the best value for
               your money, so you can enjoy top-quality services and products
@@ -33,7 +33,7 @@ const ChooseUs = () => {
               Find Details
             </button>
           </div>
-          <div className="right w-1/2">
+          <div className="right w-1/2 sm:w-full">
             <div className="one flex gap-8 mb-5">
               <div className="icon">
                 <img className="w-[15rem] " src={icon1} alt="" />

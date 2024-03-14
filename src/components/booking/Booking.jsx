@@ -5,10 +5,10 @@ const Booking = () => {
   return (
     <div className="bg-gradient-to-b from-customGray to-white">
       <div className="max-w-7xl m-auto p-3 relative">
-        <div className="max-w-7xl m-auto max-h-80 p-10 bg-white mt-16 drop-shadow-2xl">
+        <div className="max-w-7xl m-auto lg:max-h-80 p-10 bg-white mt-16 drop-shadow-2xl">
           {/* <img className="absolute z-0 bg-cover bg-center" src={bookingimg} alt="bg" /> */}
-          <div className="heading text-2xl font-bold mb-4">Book a car</div>
-          <div className="flex flex-wrap gap-6 relative">
+          <div className="heading text-2xl font-bold mb-4 md:text-center sm:text-center">Book a car</div>
+          <div className="flex flex-wrap gap-6 relative sm:justify-center md:justify-center">
             <div className="flex flex-col w-[340px] ">
               <label className="font-bold mb-2" htmlFor="">Car Model</label>
               <select className="border-2 p-2 text-[#838383]">

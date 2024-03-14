@@ -96,13 +96,13 @@ const VehicleModelComponent = () => {
     <div className="max-w-7xl mx-auto mt-[165px] px-3">
       <div className="max-w-xl mx-auto px-4 flex flex-col items-center gap-3 mb-20">
         <h2 className="text-xl font-bold">Vehicle Models</h2>
-        <h2 className="text-5xl font-bold">Our rental fleet</h2>
+        <h2 className="text-5xl font-bold text-center">Our rental fleet</h2>
         <p className="text-center font-medium text-gray-500">
           Choose from a variety of our amazing vehicles to rent for your next
           adventure or business trip
         </p>
       </div>
-      <div className="flex justify-between">
+      <div className="lg:flex justify-between">
         <div className="left flex flex-col">
           <button
             className={`bg-gray-300 px-6 py-3 text-xl font-bold mb-2 text-start ${setCol(
@@ -153,10 +153,10 @@ const VehicleModelComponent = () => {
             Toyota Camry
           </button>
         </div>
-        <div className="center">
+        <div className="center md:flex md:justify-center">
           <img src={CAR_DATA[carNo - 1].img} alt="car" />
         </div>
-        <div className="right flex flex-col gap-3 w-[300px] ">
+        <div className="right flex flex-col gap-3 w-[300px] sm:w-full md:mx-auto md:w-[70%]">
           <div className="text-white bg-[#ff4d30] px-4 py-2 font-semibold text-lg">
           {CAR_DATA[carNo - 1].price} / rent per day
           </div>
