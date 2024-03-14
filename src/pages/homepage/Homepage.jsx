@@ -8,6 +8,7 @@ import Testimonial from "../../components/testimonial/Testimonial";
 import DownloadSection from "../../components/downloadSection/DownloadSection";
 import { FaCircleArrowUp } from "react-icons/fa6";
 import Faq from "../../components/faq/Faq";
+import VehicleModelComponent from "../../components/vehicleModelComponent/VehicleModelComponent";
 
 const Homepage = () => {
   const handleScrollToTop = () => {
@@ -21,6 +22,7 @@ const Homepage = () => {
       </div>
       <Booking />
       <PlanSection />
+      <VehicleModelComponent/>
       <SloganBanner />
       <ChooseUs />
       <Testimonial />

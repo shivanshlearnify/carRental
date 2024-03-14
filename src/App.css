@@ -18,3 +18,7 @@
     overflow: hidden;
     padding: 0 4.5rem;
 }
+.carModalCol{
+  background-color: #ff4d30;
+  color: #fff;
+}

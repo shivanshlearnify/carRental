@@ -7,7 +7,7 @@ import bg from "../../assets/hero-bg.png";
 const HeroComponent = () => {
   return (
     <div className="bg-[#f8f8f8]">
-      <div className="flex max-w-7xl m-auto p-3 items-center h-[850px]">
+      <div className="flex max-w-7xl m-auto p-3 items-center h-[780px]">
         <img className="absolute top-0 right-0" src={bg} alt="bg" />
         <div className="w-1/3">
           <div className="font-bold text-xl">Plan your trip now</div>
