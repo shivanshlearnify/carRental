@@ -23,14 +23,14 @@ const Ourteam = () => {
   return (
     <Layout>
       <HeroBanner name={"Our Team"} />
-      <div className="flex flex-wrap max-w-6xl mx-auto gap-10 my-20 px-4">
+      <div className="flex flex-wrap max-w-6xl mx-auto gap-8 my-20 px-4">
         {teamPpl.map((ppl, index) => (
           <div
             key={index}
-            className="rounded-t-md rounded-b-md cursor-pointer shadow-2xl"
+            className="rounded-t-md rounded-b-md cursor-pointer shadow-2xl mx-auto"
           >
             <img className="bg-[#ff9d9d] rounded-t-md" src={ppl.img} alt={ppl.name} />
-            <div className="max-w-[180px] mx-auto flex flex-col items-center my-8">
+            <div className="max-w-[160px] mx-auto flex flex-col items-center my-8">
               <h2 className="text-2xl font-bold">{ppl.name}</h2>
               <h2 className="font-medium text-gray-500">{ppl.job}</h2>
             </div>
