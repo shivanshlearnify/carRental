@@ -5,7 +5,7 @@ const SignIn = () => {
   const navigate = useNavigate();
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className=" bg-[#ff4c3044] max-w-lg w-full rounded px-8 py-5">
+      <div className=" bg-[#ff4c3044] max-w-lg w-full rounded px-8 py-5 mx-3">
         <h2 className="text-center text-2xl font-semibold mb-4">Login</h2>
         <div className="flex flex-col gap-4">
           <input

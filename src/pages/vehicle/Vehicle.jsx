@@ -2,6 +2,7 @@ import React from "react";
 import HeroBanner from "../../components/heroBanner/HeroBanner";
 import HeroBanner2 from "../../components/heroBanner2/HeroBanner2";
 import Layout from "../../components/layout/Layout";
+import Booking from "../../components/booking/Booking";
 
 const data = [
   {
@@ -48,7 +49,10 @@ const Vehicle = () => {
       <HeroBanner name={"Vehicle"} />
       <div className="max-w-6xl mx-auto p-3 flex flex-wrap gap-12 my-20 justify-center">
         {data.map((item, index) => (
-          <div className="max-w-[528px] w-full rounded-t-md rounded-b-md cursor-pointer shadow-2xl" key={index}>
+          <div
+            className="max-w-[528px] w-full rounded-t-md rounded-b-md cursor-pointer shadow-2xl"
+            key={index}
+          >
             <img
               className="max-w-[528px] w-full h-[300px] rounded-t-md"
               src={item.img}
@@ -74,12 +78,17 @@ const Vehicle = () => {
                 </h2>
               </div>
               <div>
-              <button className="w-full cursor-pointer px-4 py-2 bg-[#ff4d30] rounded-b-md text-white">Book a ride</button>
+                <a href="#booking">
+                  <button className="w-full cursor-pointer px-4 py-2 bg-[#ff4d30] rounded-b-md text-white">
+                    Book a ride
+                  </button>
+                </a>
               </div>
             </div>
           </div>
         ))}
       </div>
+      <Booking />
       <HeroBanner2 />
     </Layout>
   );
