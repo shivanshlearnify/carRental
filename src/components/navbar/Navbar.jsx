@@ -14,17 +14,20 @@ const Navbar = () => {
         </div>
         <div>
           <ul className="flex gap-4 font-medium cursor-pointer sm:flex-wrap sm:justify-center">
-            <li onClick={()=> navigate('/')}>Home</li>
-            <li onClick={()=> navigate('/about')}>About</li>
-            <li onClick={()=> navigate('/vechilemodels')}>Vehicle Models</li>
-            <li onClick={()=> navigate('/testimonial')}>Testimonials</li>
-            <li onClick={()=> navigate('/ourteam')}>Our Team</li>
-            <li onClick={()=> navigate('/contact')}>Contact</li>
+            <li onClick={() => navigate("/")}>Home</li>
+            <li onClick={() => navigate("/about")}>About</li>
+            <li onClick={() => navigate("/vechilemodels")}>Vehicle Models</li>
+            <li onClick={() => navigate("/testimonial")}>Testimonials</li>
+            <li onClick={() => navigate("/ourteam")}>Our Team</li>
+            <li onClick={() => navigate("/contact")}>Contact</li>
           </ul>
         </div>
         <div className="flex gap-3 font-medium text-lg">
-          <button>Sign In</button>
-          <button className="bg-[#ff4d30] text-white px-4 py-2 rounded">
+          <button onClick={() => navigate("/signIn")}>Sign In</button>
+          <button
+            onClick={() => navigate("/signUp")}
+            className="bg-[#ff4d30] text-white px-4 py-2 rounded"
+          >
             Register
           </button>
         </div>

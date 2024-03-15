@@ -11,7 +11,10 @@ const backgroundStyle = {
 
 const DownloadSection = () => {
   return (
-    <div className="dSection bg-[#f8f8f8] py-24 h-[620px]" style={backgroundStyle}>
+    <div
+      className="dSection bg-[#f8f8f8] py-24 h-[620px]"
+      style={backgroundStyle}
+    >
       <div className="max-w-7xl m-auto px-3">
         <div className="max-w-lg ">
           <h1 className="text-5xl font-bold sm:text-center">
@@ -23,8 +26,28 @@ const DownloadSection = () => {
             Led income months itself and houses you.
           </p>
           <div className="flex gap-5 sm:flex-col">
-            <img className="sm:w-[180px] sm:mx-auto" src={appstore} alt="" />
-            <img className="sm:w-[180px] sm:mx-auto" src={googletore} alt="" />
+            <a
+              href="https://www.apple.com/in/app-store/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                className="sm:w-[180px] sm:mx-auto cursor-pointer"
+                src={appstore}
+                alt=""
+              />
+            </a>
+            <a
+              href="https://play.google.com/store/apps?hl=en_IN&gl=US"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                className="sm:w-[180px] sm:mx-auto cursor-pointer"
+                src={googletore}
+                alt=""
+              />
+            </a>
           </div>
         </div>
       </div>

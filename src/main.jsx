@@ -16,6 +16,9 @@ import TestimonialPage from "./pages/testimonial/TestimonialPage.jsx";
 import Vehicle from "./pages/vehicle/Vehicle.jsx";
 import Ourteam from "./pages/ourTeam/Ourteam.jsx";
 import Contact from "./pages/contact/Contact.jsx";
+import SignIn from "./pages/registration/SignIn.jsx";
+import Signup from "./pages/registration/Signup.jsx";
+
 
 const router = createBrowserRouter([
   {
@@ -47,10 +50,19 @@ const router = createBrowserRouter([
         element: <Contact />,
       },
       {
+        path: "/signIn",
+        element: <SignIn />,
+      },
+      {
+        path: "/signUp",
+        element: <Signup />,
+      },
+      {
         path: "/*",
         element: <Nopage />,
       },
     ],
+    
   },
 ]);
 

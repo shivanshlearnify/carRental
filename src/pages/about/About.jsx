@@ -2,10 +2,11 @@ import React from 'react'
 import HeroBanner from '../../components/heroBanner/HeroBanner'
 import PlanSection from '../../components/planSection/PlanSection'
 import HeroBanner2 from '../../components/heroBanner2/HeroBanner2'
+import Layout from '../../components/layout/Layout'
 
 const About = () => {
   return (
-    <div>
+    <Layout>
         <HeroBanner name={'About'}/>
         <div className="flex max-w-5xl m-auto gap-10 pt-20 px-3 sm:flex-col">
         <img
@@ -33,7 +34,7 @@ const About = () => {
       </div>
         <PlanSection/>
         <HeroBanner2/>
-    </div>
+    </Layout>
   )
 }
 

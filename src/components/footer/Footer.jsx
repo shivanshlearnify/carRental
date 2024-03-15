@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const Footer = () => {
+  const [email, setemail] = useState("");
+
+  const handleChange = (e) => {
+    setemail(e.target.value);
+  };
+
+  const handleToast = () => {
+    email === ""  ? toast.error("Please add a valid Email") :
+    toast.success(`Successfully Subscribed for ${email} Email`);
+    setemail("");
+  };
   return (
     <div className="flex max-w-7xl m-auto px-3 py-[100px] gap-10 sm:flex-col">
       <ul className="w-1/4 flex flex-col gap-3 sm:w-full">
@@ -33,10 +45,21 @@ const Footer = () => {
           Subscribe your Email address for latest news & updates.
         </li>
         <li className="w-full">
-          <input className="border w-full px-4 py-2" type="text" placeholder="Enter Email Address " />{" "}
+          <input
+            className="border w-full px-4 py-2"
+            type="text"
+            placeholder="Enter Email Address "
+            value={email}
+            onChange={handleChange}
+          />
         </li>
         <li>
-          <button className="w-full cursor-pointer px-4 py-2 bg-[#ff4d30] text-white">Submit</button>
+          <button
+            onClick={handleToast}
+            className="w-full cursor-pointer px-4 py-2 bg-[#ff4d30] text-white"
+          >
+            Submit
+          </button>
         </li>
       </ul>
     </div>

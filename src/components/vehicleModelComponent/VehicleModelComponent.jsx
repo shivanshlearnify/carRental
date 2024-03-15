@@ -158,7 +158,7 @@ const VehicleModelComponent = () => {
         </div>
         <div className="right flex flex-col gap-3 w-[300px] sm:w-full md:mx-auto md:w-[70%]">
           <div className="text-white bg-[#ff4d30] px-4 py-2 font-semibold text-lg">
-          {CAR_DATA[carNo - 1].price} / rent per day
+            {CAR_DATA[carNo - 1].price} / rent per day
           </div>
           <div>
             <span className="text-xl font-semibold text-gray-500">
@@ -188,10 +188,11 @@ const VehicleModelComponent = () => {
             <span className="text-xl font-semibold text-gray-500">Fuel :-</span>{" "}
             {CAR_DATA[carNo - 1].fuel}
           </div>
-
-          <button className="text-white bg-[#ff4d30] px-4 py-2 font-semibold text-lg w-full">
-            Reserve Now
-          </button>
+          <a href="#booking">
+            <button className="text-white bg-[#ff4d30] px-4 py-2 font-semibold text-lg w-full">
+              Reserve Now
+            </button>
+          </a>
         </div>
       </div>
     </div>

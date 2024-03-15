@@ -8,6 +8,7 @@ import Person3 from "../../assets/3.png";
 import Person4 from "../../assets/4.png";
 import Person5 from "../../assets/5.png";
 import Person6 from "../../assets/6.png";
+import Layout from "../../components/layout/Layout";
 
 const teamPpl = [
   { img: Person1, name: "Luke Miller", job: "Salesman" },
@@ -20,7 +21,7 @@ const teamPpl = [
 
 const Ourteam = () => {
   return (
-    <div>
+    <Layout>
       <HeroBanner name={"Our Team"} />
       <div className="flex flex-wrap max-w-6xl mx-auto gap-10 my-20 px-4">
         {teamPpl.map((ppl, index) => (
@@ -37,7 +38,7 @@ const Ourteam = () => {
         ))}
       </div>
       <HeroBanner2 />
-    </div>
+    </Layout>
   );
 };
 

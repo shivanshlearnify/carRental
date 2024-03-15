@@ -2,6 +2,7 @@ import React from "react";
 import bg from "../../assets/Choosebg.png";
 import main from "../../assets/ChooseMain.png";
 import icon1 from "../../assets/Chooseicon1.png";
+import { useNavigate } from "react-router-dom";
 
 const backgroundStyle = {
   backgroundImage: `url(${bg})`,
@@ -9,6 +10,7 @@ const backgroundStyle = {
   backgroundPosition: "-2% 129%",
 };
 const ChooseUs = () => {
+  const navigate = useNavigate();
   return (
     <div className=" mx-auto px-4 pb-[126px]" style={backgroundStyle}>
       <div className="max-w-7xl mx-auto">
@@ -29,7 +31,10 @@ const ChooseUs = () => {
               ultimate renting experience, so don't miss out on your chance to
               save big.
             </p>
-            <button className="bg-[#ff4d30] rounded text-white text-[24px] font-bold py-[8px] px-[30px] shadow-[#ff4d30] shadow-2xl	 ">
+            <button
+              onClick={() => navigate("/about")}
+              className="bg-[#ff4d30] rounded text-white text-[24px] font-bold py-[8px] px-[30px] shadow-[#ff4d30] shadow-2xl	 "
+            >
               Find Details
             </button>
           </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import HeroBanner from "../../components/heroBanner/HeroBanner";
 import HeroBanner2 from "../../components/heroBanner2/HeroBanner2";
+import Layout from "../../components/layout/Layout";
 
 const data = [
   {
@@ -43,7 +44,7 @@ const data = [
 
 const Vehicle = () => {
   return (
-    <div>
+    <Layout>
       <HeroBanner name={"Vehicle"} />
       <div className="max-w-6xl mx-auto p-3 flex flex-wrap gap-12 my-20 justify-center">
         {data.map((item, index) => (
@@ -80,7 +81,7 @@ const Vehicle = () => {
         ))}
       </div>
       <HeroBanner2 />
-    </div>
+    </Layout>
   );
 };
 

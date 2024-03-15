@@ -3,7 +3,7 @@ import bookingimg from "../../assets/booking.png";
 
 const Booking = () => {
   return (
-    <div className="bg-gradient-to-b from-customGray to-white">
+    <div id="booking" className="bg-gradient-to-b from-customGray to-white">
       <div className="max-w-7xl m-auto p-3 relative">
         <div className="max-w-7xl m-auto lg:max-h-80 p-10 bg-white mt-16 drop-shadow-2xl">
           {/* <img className="absolute z-0 bg-cover bg-center" src={bookingimg} alt="bg" /> */}

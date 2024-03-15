@@ -2,9 +2,11 @@ import React from "react";
 import HeroBanner from "../../components/heroBanner/HeroBanner";
 import HeroBanner2 from "../../components/heroBanner2/HeroBanner2";
 
+import Layout from '../../components/layout/Layout'
+
 const Contact = () => {
   return (
-    <div>
+    <Layout>
       <HeroBanner name={"Contact Page"} />
       <div className="flex max-w-7xl justify-between m-auto p-3 my-10 md:flex-col sm:flex-col md:gap-8 sm:gap-4">
         <div className="left w-1/3 flex flex-col gap-3 md:w-full sm:w-full">
@@ -29,7 +31,7 @@ const Contact = () => {
         </div>
       </div>
       <HeroBanner2 />
-    </div>
+    </Layout>
   );
 };
 

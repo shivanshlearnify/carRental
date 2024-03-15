@@ -1,16 +1,14 @@
-import Navbar from "./components/navbar/Navbar";
-import Footer from "./components/footer/Footer";
 import "./App.css";
 import { Outlet } from "react-router-dom";
 import ScrollTop from "./components/scrollTop/ScrollTop";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <div>
-      <Navbar />
-      <ScrollTop/>
+      <ScrollTop />
+      <Toaster/>
       <Outlet />
-      <Footer />
     </div>
   );
 }
