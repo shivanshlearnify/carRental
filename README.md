@@ -2,9 +2,10 @@
 
 Welcome to the Car Rental website project! This is a responsive web application built using React.js and Tailwind CSS. It allows users to rent cars conveniently and efficiently.
 
+live:- https://carreantal.netlify.app/
+
 ## Features
 
-- **User Authentication**: Users can sign up, log in, and log out securely.
 - **Browse Cars**: Users can browse through a wide selection of cars available for rental.
 - **Search Functionality**: Users can search for cars based on various criteria such as make, model, or price range.
 - **Car Details**: Detailed information about each car including specifications, features, and rental pricing.
@@ -16,10 +17,6 @@ Welcome to the Car Rental website project! This is a responsive web application 
 
 - **React.js**: A JavaScript library for building user interfaces.
 - **Tailwind CSS**: A utility-first CSS framework for quickly building custom designs.
-- **Firebase Authentication**: For secure user authentication and management.
-- **Firebase Firestore**: A flexible, scalable database for storing and syncing data in real time.
-- **React Router**: For client-side routing and navigation.
-- **React Datepicker**: For selecting rental dates conveniently.
 
 ## Usage
 
