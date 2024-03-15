@@ -13,7 +13,6 @@ live:- https://carreantal.netlify.app/
 - **Search Functionality**: Users can search for cars based on various criteria such as make, model, or price range.
 - **Car Details**: Detailed information about each car including specifications, features, and rental pricing.
 - **Booking System**: Users can select rental dates and book cars for desired periods.
-- **User Dashboard**: Logged-in users have access to a personalized dashboard where they can view their booking history, manage their profile, and more.
 - **Responsive Design**: The website is designed to be fully responsive, ensuring optimal viewing and interaction experience across a wide range of devices.
 
 ## Technologies Used
