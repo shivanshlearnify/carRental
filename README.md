@@ -4,6 +4,9 @@ Welcome to the Car Rental website project! This is a responsive web application 
 
 live:- https://carreantal.netlify.app/
 
+![image](https://github.com/shivanshlearnify/carRental/assets/128142418/2fc38b75-806f-4b85-af5d-d090cffede9a)
+
+
 ## Features
 
 - **Browse Cars**: Users can browse through a wide selection of cars available for rental.
