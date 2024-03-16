@@ -1,0 +1,15 @@
+import React, { useState } from "react";
+import MyContext from "./MyContext";
+
+function MyState({ children }) {
+  const [loading, setLoading] = useState(false);
+  return (
+  <MyContext.Provider 
+  value={
+    loading
+}>
+    {children}
+</MyContext.Provider>);
+}
+
+export default MyState;

@@ -10,6 +10,7 @@ import { FaCircleArrowUp } from "react-icons/fa6";
 import Faq from "../../components/faq/Faq";
 import VehicleModelComponent from "../../components/vehicleModelComponent/VehicleModelComponent";
 import Layout from "../../components/layout/Layout";
+import Loader from "../../components/loader/Loader";
 
 const Homepage = () => {
   const handleScrollToTop = () => {
