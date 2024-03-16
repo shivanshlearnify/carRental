@@ -3,10 +3,15 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import MyContext from "../../context/MyContext";
 
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, fireDB } from "../../firebase/FirebaseConfig";
+import { Timestamp, addDoc, collection } from "firebase/firestore";
+import Loader from "../../components/loader/Loader";
+
 const Signup = () => {
   const navigate = useNavigate();
 
-  const { loding, setLoading } = useContext(MyContext);
+  const { loading, setLoading } = useContext(MyContext);
 
   const [userSignup, setUserSignup] = useState({
     name: "",
@@ -25,14 +30,52 @@ const Signup = () => {
     }
     setLoading(true);
     try {
+      const users = await createUserWithEmailAndPassword(
+        auth,
+        userSignup.email,
+        userSignup.password
+      );
+
+      //create user
+      const user = {
+        name: userSignup.name,
+        email: userSignup.email,
+        uid: users.user.uid,
+        role: userSignup.role,
+        time: Timestamp.now(),
+        date: new Date().toLocaleString("en-US", {
+          month: "short",
+          day: "2-digit",
+          year: "numeric",
+        }),
+      };
+      // create user Refrence
+      const userRefrence = collection(fireDB, "user");
+
+      // Add User Detail
+      addDoc(userRefrence, user);
+
+      setUserSignup({
+        name: "",
+        email: "",
+        password: "",
+      });
+
+      toast.success("Signup Sucessfully");
+      toast.success("Now You Can Login ");
+
+      setLoading(false);
+      navigate("/SignIn");
     } catch (error) {
       console.log(error);
+      toast.error(error)
       setLoading(false);
     }
   };
 
   return (
     <div className="flex justify-center items-center h-screen">
+      {loading && <Loader/>}
       <div className=" bg-[#ff4c3044] max-w-lg w-full rounded px-8 py-5 mx-3">
         <h2 className="text-center text-2xl font-semibold mb-4">Sign Up</h2>
         <div className="flex flex-col gap-4">
