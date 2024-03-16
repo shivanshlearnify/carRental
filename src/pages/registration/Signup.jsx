@@ -25,7 +25,7 @@ const Signup = () => {
             />
           </div>
           <button className="w-full bg-[#ff4d30] my-4 rounded text-xl font-semibold text-white py-2">
-            Login
+            SignUp
           </button>
           <div className="flex justify-between">
             <p className="font-semibold">
