@@ -21,8 +21,9 @@ const HeroComponent = () => {
             Save <span className="text-[#ff4d30]">big</span> with our car rental
           </div>
           <div className="font-medium text-gray-500 my-4">
-            Rent the car of your dreams. Unbeatable prices, unlimited miles,
-            flexible pick-up options and much more.
+            Discover the car of your dreams with unparalleled affordability,
+            limitless mileage, adaptable pick-up choices, and an array of
+            additional benefits.
           </div>
           <div className="flex gap-5 font-bold mt-8 sm:justify-center md:justify-center">
             <a href="#booking">

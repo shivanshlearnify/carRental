@@ -2,6 +2,13 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const user = JSON.parse(localStorage.getItem("users"));
+
+  const logout = () => {
+    localStorage.clear("users");
+    navigate("/signIn");
+  };
+
   const navigate = useNavigate();
   return (
     <div className="lg:absolute top-0  w-full z-10">
@@ -15,21 +22,43 @@ const Navbar = () => {
         <div>
           <ul className="flex gap-4 font-medium cursor-pointer sm:flex-wrap sm:justify-center">
             <li onClick={() => navigate("/")}>Home</li>
-            <li onClick={() => navigate("/about")}>About</li>
+            <li onClick={() => navigate("/about")}>About </li>
             <li onClick={() => navigate("/vechilemodels")}>Vehicle Models</li>
             <li onClick={() => navigate("/testimonial")}>Testimonials</li>
             <li onClick={() => navigate("/ourteam")}>Our Team</li>
-            <li onClick={() => navigate("/contact")}>Contact</li>
+            <li onClick={() => navigate("/contact")}>Contact Us</li>
           </ul>
         </div>
         <div className="flex gap-3 font-medium text-lg">
-          <button onClick={() => navigate("/signIn")}>Sign In</button>
-          <button
-            onClick={() => navigate("/signUp")}
-            className="bg-[#ff4d30] text-white px-4 py-2 rounded"
-          >
-            Register
-          </button>
+          {!user && (
+            <button onClick={() => navigate("/signIn")}>Sign In</button>
+          )}
+          {!user && (
+            <button
+              onClick={() => navigate("/signUp")}
+              className="bg-[#ff4d30] text-white px-4 py-2 rounded"
+            >
+              Register
+            </button>
+          )}
+          {user?.role === "admin" && (
+            <button onClick={() => navigate("/admin-dashboard")}>
+              Hey, {user.name}
+            </button>
+          )}
+          {user?.role === "user" && (
+            <button onClick={() => navigate("/user-dashboard")}>
+              Hey, {user.name}
+            </button>
+          )}
+          {user && (
+            <button
+              onClick={logout}
+              className="bg-[#ff4d30] text-white px-4 py-2 rounded"
+            >
+              Logout
+            </button>
+          )}
         </div>
       </div>
     </div>

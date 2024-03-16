@@ -3,6 +3,7 @@ import HeroBanner from "../../components/heroBanner/HeroBanner";
 import HeroBanner2 from "../../components/heroBanner2/HeroBanner2";
 import Layout from "../../components/layout/Layout";
 import Booking from "../../components/booking/Booking";
+import ScrollTopArrow from "../../components/scrollTopArrow/ScrollTopArrow";
 
 const data = [
   {
@@ -47,6 +48,8 @@ const Vehicle = () => {
   return (
     <Layout>
       <HeroBanner name={"Vehicle"} />
+      
+      <ScrollTopArrow/>
       <div className="max-w-6xl mx-auto p-3 flex flex-wrap gap-12 my-20 justify-center">
         {data.map((item, index) => (
           <div
@@ -54,7 +57,7 @@ const Vehicle = () => {
             key={index}
           >
             <img
-              className="max-w-[528px] w-full h-[300px] rounded-t-md"
+              className="max-w-[528px] w-full h-[300px] rounded-t-md sm:h-[210px]"
               src={item.img}
               alt={item.company}
             />

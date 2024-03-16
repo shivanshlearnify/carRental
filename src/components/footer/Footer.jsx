@@ -9,8 +9,9 @@ const Footer = () => {
   };
 
   const handleToast = () => {
-    email === ""  ? toast.error("Please add a valid Email") :
-    toast.success(`Successfully Subscribed for ${email} Email`);
+    email === ""
+      ? toast.error("Please add a valid Email")
+      : toast.success(`Successfully Subscribed for ${email} Email`);
     setemail("");
   };
   return (
@@ -18,8 +19,9 @@ const Footer = () => {
       <ul className="w-1/4 flex flex-col gap-3 sm:w-full">
         <li className=" text-xl font-bold">CAR Rental</li>
         <li className="font-medium text-gray-500">
-          We offers a big range of vehicles for all your driving needs. We have
-          the perfect car to meet your needs.
+          We provide an extensive selection of vehicles tailored to suit all
+          your driving requirements. Whatever your needs may be, we offer the
+          ideal car to match them perfectly.
         </li>
         <li className="font-bold cursor-pointer">+91 7894561239</li>
         <li className="font-bold cursor-pointer">lorem@gmail.com</li>

@@ -67,15 +67,23 @@ const Signup = () => {
       setLoading(false);
       navigate("/SignIn");
     } catch (error) {
-      console.log(error);
-      toast.error(error)
+      console.log(error.code);
+      if (error.code === "auth/invalid-email") {
+        toast.error("Invalid email. Please provide a valid email address.");
+      } else if (error.code === "auth/weak-password") {
+        toast.error("Weak Password");
+      } else if (error.code === "auth/email-already-in-use") {
+        toast.error("Email Already In Use");
+      } else {
+        toast.error(error.code);
+      }
       setLoading(false);
     }
   };
 
   return (
     <div className="flex justify-center items-center h-screen">
-      {loading && <Loader/>}
+      {loading && <Loader />}
       <div className=" bg-[#ff4c3044] max-w-lg w-full rounded px-8 py-5 mx-3">
         <h2 className="text-center text-2xl font-semibold mb-4">Sign Up</h2>
         <div className="flex flex-col gap-4">

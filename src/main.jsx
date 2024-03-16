@@ -18,6 +18,8 @@ import Ourteam from "./pages/ourTeam/Ourteam.jsx";
 import Contact from "./pages/contact/Contact.jsx";
 import SignIn from "./pages/registration/SignIn.jsx";
 import Signup from "./pages/registration/Signup.jsx";
+import AdminDashboard from "./pages/adminDashboard/AdminDashboard.jsx";
+import UserDashboard from "./pages/userDashboard/UserDashboard.jsx";
 
 
 const router = createBrowserRouter([
@@ -56,6 +58,14 @@ const router = createBrowserRouter([
       {
         path: "/signUp",
         element: <Signup />,
+      },
+      {
+        path: "/user-dashboard",
+        element: <UserDashboard />,
+      },
+      {
+        path: "/admin-dashboard",
+        element: <AdminDashboard />,
       },
       {
         path: "/*",

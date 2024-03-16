@@ -9,6 +9,7 @@ import Person4 from "../../assets/4.png";
 import Person5 from "../../assets/5.png";
 import Person6 from "../../assets/6.png";
 import Layout from "../../components/layout/Layout";
+import ScrollTopArrow from "../../components/scrollTopArrow/ScrollTopArrow";
 
 const teamPpl = [
   { img: Person1, name: "Luke Miller", job: "Salesman" },
@@ -23,6 +24,8 @@ const Ourteam = () => {
   return (
     <Layout>
       <HeroBanner name={"Our Team"} />
+      
+      <ScrollTopArrow/>
       <div className="flex flex-wrap max-w-6xl mx-auto gap-8 my-20 px-4">
         {teamPpl.map((ppl, index) => (
           <div
