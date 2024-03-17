@@ -48,8 +48,8 @@ const Vehicle = () => {
   return (
     <Layout>
       <HeroBanner name={"Vehicle"} />
-      
-      <ScrollTopArrow/>
+
+      <ScrollTopArrow />
       <div className="max-w-6xl mx-auto p-3 flex flex-wrap gap-12 my-20 justify-center">
         {data.map((item, index) => (
           <div
@@ -81,9 +81,9 @@ const Vehicle = () => {
                 </h2>
               </div>
               <div>
-                <a href="#booking">
+                <a href="/">
                   <button className="w-full cursor-pointer px-4 py-2 bg-[#ff4d30] rounded-b-md text-white">
-                    Book a ride
+                    Go to Homepage for Booking
                   </button>
                 </a>
               </div>
@@ -91,7 +91,6 @@ const Vehicle = () => {
           </div>
         ))}
       </div>
-      <Booking />
       <HeroBanner2 />
     </Layout>
   );
