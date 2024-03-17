@@ -4,6 +4,7 @@ import { MdLogout } from "react-icons/md";
 import { TiUser } from "react-icons/ti";
 import { FaCar } from "react-icons/fa6";
 import { GrOrderedList } from "react-icons/gr";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 const AdminDashboard = () => {
   const user = JSON.parse(localStorage.getItem("users"));
@@ -66,22 +67,35 @@ const AdminDashboard = () => {
               </div>
             </div>
           </div>
-          <div className="right flex gap-[20px] justify-center w-full mt-[34px]">
-            <div className="bg-white w-[15rem] h-[10rem] rounded-2xl p-5 mt-8 flex justify-center items-center text-xl font-semibold cursor-pointer flex-col text-[#ff4d30] gap-2">
-              <FaCar className="w-[36px] h-[36px]" />
-              <h2>5</h2>
-              <h2>Fleet of Vehicles</h2>
-            </div>
-            <div className="bg-white w-[15rem] h-[10rem] rounded-2xl p-5 mt-8 flex justify-center items-center text-xl font-semibold cursor-pointer flex-col text-[#ff4d30] gap-2">
-              <GrOrderedList className="w-[36px] h-[36px]" />
-              <h2>5</h2>
-              <h2>Total Booking</h2>
-            </div>
-            <div className="bg-white w-[15rem] h-[10rem] rounded-2xl p-5 mt-8 flex justify-center items-center text-xl font-semibold cursor-pointer flex-col text-[#ff4d30] gap-2">
-              <TiUser className="w-[36px] h-[36px]" />
-              <h2>5</h2>
-              <h2>Total Users</h2>
-            </div>
+          <div>
+            <Tabs className="right flex gap-[20px] justify-center w-full mt-[34px]">
+              <TabList>
+                <Tab className="bg-white w-[15rem] h-[10rem] rounded-2xl p-5 mt-8 flex justify-center items-center text-xl font-semibold cursor-pointer flex-col text-[#ff4d30] gap-2">
+                  <FaCar className="w-[36px] h-[36px]" />
+                  <h2>5</h2>
+                  <h2>Fleet of Vehicles</h2>
+                </Tab>
+                <Tab className="bg-white w-[15rem] h-[10rem] rounded-2xl p-5 mt-8 flex justify-center items-center text-xl font-semibold cursor-pointer flex-col text-[#ff4d30] gap-2">
+                  <GrOrderedList className="w-[36px] h-[36px]" />
+                  <h2>5</h2>
+                  <h2>Total Booking</h2>
+                </Tab>
+                <Tab className="bg-white w-[15rem] h-[10rem] rounded-2xl p-5 mt-8 flex justify-center items-center text-xl font-semibold cursor-pointer flex-col text-[#ff4d30] gap-2">
+                  <TiUser className="w-[36px] h-[36px]" />
+                  <h2>5</h2>
+                  <h2>Total Users</h2>
+                </Tab>
+              </TabList>
+              <TabPanel>
+                <h2>lorem</h2>
+              </TabPanel>
+              <TabPanel>
+                <h2>Any content 2</h2>
+              </TabPanel>
+              <TabPanel>
+                <h2>Any content 3</h2>
+              </TabPanel>
+            </Tabs>
           </div>
         </div>
       </div>

@@ -86,7 +86,7 @@ const SignIn = () => {
   return (
     <div className="flex justify-center items-center h-screen">
       {loading && <Loader />}
-      <div className=" bg-[#ff307544] max-w-lg w-full rounded px-8 py-5 mx-3">
+      <div className=" bg-[#ff307544] max-w-lg w-full rounded px-8 py-5 mx-3 sm:px-3">
         <h2 className="text-center text-2xl font-semibold mb-4">Login</h2>
         <div className="flex flex-col gap-4">
           <input
@@ -139,16 +139,16 @@ const SignIn = () => {
         </div>
         <div className="my-4">
           <h2 className="text-center text-xl font-bold">Login Credentials</h2>
-          <div className="flex justify-between mt-4">
+          <div className="flex justify-between mt-4 sm:flex-col">
             <div className="font-semibold">
-              <h2 className="text-center">user Credential</h2>
-              <h2>Email <br /> testuser1@gmail.com</h2>
-              <h2>Password <br /> test741</h2>
+              <h2 className="text-center">User Credential</h2>
+              <h2>Email - <br /> testuser1@gmail.com</h2>
+              <h2>Password - <br /> test741</h2>
             </div>
             <div className="font-semibold">
               <h2 className="text-center">Admin Credential</h2>
-              <h2>Email <br /> testadmin@gmail.com</h2>
-              <h2>Password <br /> test741</h2>
+              <h2>Email - <br /> testadmin@gmail.com</h2>
+              <h2>Password -<br /> test741</h2>
             </div>
           </div>
         </div>

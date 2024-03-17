@@ -199,7 +199,7 @@ const Booking = () => {
         id="modal"
         className={`w-[100vw] h-[100vh] flex justify-center items-center absolute backdrop-blur-[2px] ${
           !modal ? "activeModal" : ""
-        } top-[54%] fixed`}
+        } top-[54%] fixed sm:px-3`}
       >
         <div className="booking-modal bg-white max-w-xl mx-auto border rounded-xl ">
           <div className="bg-[#ff4d30] text-white text-xl font-semibold py-2 px-4 rounded-t-xl flex justify-between items-center ">
