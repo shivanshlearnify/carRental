@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaInfoCircle } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { fireDB } from "../../firebase/FirebaseConfig";
 import { Timestamp, addDoc, collection } from "firebase/firestore";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import MyState from "../../context/MyState";
+import MyContext from "../../context/MyContext";
 
 const Booking = () => {
   const user = JSON.parse(localStorage.getItem("users"));

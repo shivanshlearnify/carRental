@@ -82,72 +82,63 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center h-screen bg-gradient-to-r from-purple-400 to-pink-500">
       {loading && <Loader />}
-      <div className=" bg-[#ff4c3044] max-w-lg w-full rounded px-8 py-5 mx-3">
-        <h2 className="text-center text-2xl font-semibold mb-4">Sign Up</h2>
-        <div className="flex flex-col gap-4">
+      <div className="bg-white max-w-lg w-full rounded-lg px-8 py-6 mx-3 shadow-md">
+        <h2 className="text-center text-3xl font-semibold text-gray-800 mb-6">
+          Sign Up
+        </h2>
+        <div className="flex flex-col gap-6">
           <input
-            className="rounded px-4 py-2 text-lg focus:outline-none"
+            className="rounded-lg px-4 py-3 text-lg focus:outline-none bg-gray-100 border border-gray-300"
             type="text"
             placeholder="Full Name"
             value={userSignup.name}
-            onChange={(e) => {
-              setUserSignup({
-                ...userSignup,
-                name: e.target.value,
-              });
-            }}
+            onChange={(e) =>
+              setUserSignup({ ...userSignup, name: e.target.value })
+            }
           />
           <input
-            className="rounded px-4 py-2 text-lg focus:outline-none"
-            type="text"
+            className="rounded-lg px-4 py-3 text-lg focus:outline-none bg-gray-100 border border-gray-300"
+            type="email"
             placeholder="Email Address"
             value={userSignup.email}
-            onChange={(e) => {
-              setUserSignup({
-                ...userSignup,
-                email: e.target.value,
-              });
-            }}
+            onChange={(e) =>
+              setUserSignup({ ...userSignup, email: e.target.value })
+            }
           />
           <input
-            className="rounded px-4 py-2 text-lg focus:outline-none"
-            type="text"
+            className="rounded-lg px-4 py-3 text-lg focus:outline-none bg-gray-100 border border-gray-300"
+            type="password"
             placeholder="Password"
             value={userSignup.password}
-            onChange={(e) => {
-              setUserSignup({
-                ...userSignup,
-                password: e.target.value,
-              });
-            }}
+            onChange={(e) =>
+              setUserSignup({ ...userSignup, password: e.target.value })
+            }
           />
         </div>
         <button
           onClick={userSignupFunction}
-          className="w-full bg-[#ff4d30] my-4 rounded text-xl font-semibold text-white py-2"
+          className="w-full bg-pink-500 hover:bg-pink-600 text-white py-3 rounded-lg text-xl font-semibold transition duration-300 ease-in-out my-4"
         >
-          SignUp
+          Sign Up
         </button>
         <div className="flex justify-between">
-          <p className="font-semibold">
-            Have an account
+          <p className="font-semibold text-gray-700">
+            Already have an account?{" "}
             <span
-              className="text-[#ff4d30] cursor-pointer"
+              className="text-pink-500 cursor-pointer"
               onClick={() => navigate("/SignIn")}
             >
-              {" "}
-              SignIn
+              Sign In
             </span>
           </p>
-          <p className="font-semibold">
-            Skip to
+          <p className="font-semibold text-gray-700">
+            Skip to{" "}
             <span
-              className="text-[#ff4d30] cursor-pointer"
+              className="text-pink-500 cursor-pointer"
               onClick={() => navigate("/")}
             >
-              {" "}
               HomePage
             </span>
           </p>
