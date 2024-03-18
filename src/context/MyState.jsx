@@ -29,15 +29,36 @@ function MyState({ children }) {
     }
   };
 
+  //  All user function
+
+  const [userInfo, setUserInfo] = useState([]);
+
+  const getAllUserFunction = async () => {
+    setLoading(true);
+    try {
+      const q = query(collection(fireDB, "user"), orderBy("time"));
+      const data = onSnapshot(q, (QuerySnapshot) => {
+        let productArray = [];
+        QuerySnapshot.forEach((doc) => {
+          productArray.push({ ...doc.data(), id: doc.id });
+        });
+        setUserInfo(productArray);
+        setLoading(false);
+      });
+      return () => data;
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     getAllBookingfunction();
+    getAllUserFunction();
   }, []);
 
-
-
   return (
-    <MyContext.Provider value={{ loading, setLoading, bookingInfo }}>
+    <MyContext.Provider value={{ loading, setLoading, bookingInfo , userInfo}}>
       {children}
     </MyContext.Provider>
   );
