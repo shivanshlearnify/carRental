@@ -17,11 +17,12 @@ import {
   MdOutlineMarkEmailUnread,
   MdPhoneInTalk,
   MdLocationCity,
-  MdEmail ,
-  MdVerifiedUser 
+  MdEmail,
+  MdVerifiedUser,
 } from "react-icons/md";
 import { TbMapPinCode } from "react-icons/tb";
 import Loader from "../../components/loader/Loader";
+import ScrollTopArrow from "../../components/scrollTopArrow/ScrollTopArrow";
 
 const AdminDashboard = () => {
   const user = JSON.parse(localStorage.getItem("users"));
@@ -37,9 +38,10 @@ const AdminDashboard = () => {
   };
   return (
     <div>
+      <ScrollTopArrow />
       <div className="bg-[#ff4d30] h-[320px]">
-        <div className="relative p-5 flex gap-10">
-          <div className="left max-w-[18rem] bg-white h-[95vh] top-[5px] rounded-xl drop-shadow-2xl p-8 flex flex-col justify-between">
+        <div className="relative p-5 flex gap-10 sm:flex-col">
+          <div className="left max-w-[18rem] bg-white h-[95vh] top-[5px] rounded-xl drop-shadow-2xl p-8 flex flex-col justify-between sm:mx-auto">
             <div>
               <h2 className="text-center text-2xl font-semibold">
                 Admin dashboard
@@ -89,8 +91,8 @@ const AdminDashboard = () => {
             </div>
           </div>
           <div>
-            <Tabs className="right flex flex-col gap-[200px] justify-center w-[62rem] mt-[34px]">
-              <TabList className="flex gap-[20px] w-full justify-center">
+            <Tabs className="right flex flex-col gap-[200px] justify-center w-[62rem] mt-[34px] ">
+              <TabList className="flex gap-[20px] w-full justify-center sm:flex-col sm:mx-auto">
                 <Tab className="bg-white w-[15rem] h-[10rem] rounded-2xl p-5 mt-8 flex justify-center items-center text-xl font-semibold cursor-pointer flex-col text-[#ff4d30] gap-2">
                   <GrOrderedList className="w-[36px] h-[36px]" />
                   <h2>{bookingInfo.length}</h2>
@@ -113,7 +115,7 @@ const AdminDashboard = () => {
                   {bookingInfo.map((info, index) => (
                     <div
                       key={index}
-                      className="my-8 max-w-[90%] bg-red-100 rounded-lg p-6 cursor-pointer shadow-md"
+                      className="my-8 max-w-[90vw] bg-red-100 rounded-lg p-6 cursor-pointer shadow-md sm:w-full sm:mx-auto"
                     >
                       <h2 className="text-2xl font-bold mb-6">
                         Booking Details
@@ -234,13 +236,16 @@ const AdminDashboard = () => {
                 <TabPanel className="flex gap-2 flex-wrap cursor-pointer">
                   {loading && <Loader />}
                   {userInfo.map((user, index) => (
-                    <div key={index} className="bg-red-200 p-4 my-2 rounded-xl w-[20rem]">
+                    <div
+                      key={index}
+                      className="bg-red-200 p-4 my-2 rounded-xl w-[20rem]"
+                    >
                       <div className="flex items-center mb-2">
                         <GrOrderedList className="text-xl mr-2 text-red-500" />
                         <span className="text-lg font-semibold">
                           User Sno:
                         </span>{" "}
-                        {index+1}
+                        {index + 1}
                       </div>
                       <div className="flex items-center mb-2">
                         <FaUserFriends className="text-xl mr-2 text-red-500" />
@@ -250,21 +255,21 @@ const AdminDashboard = () => {
                         {user.name}
                       </div>
                       <div className="flex items-center mb-2">
-                        <MdEmail  className="text-xl mr-2 text-red-500" />
+                        <MdEmail className="text-xl mr-2 text-red-500" />
                         <span className="text-lg font-semibold">
                           User email:
                         </span>{" "}
                         {user.email}
                       </div>
                       <div className="flex items-center mb-2">
-                        <BsCalendar2Date  className="text-xl mr-2 text-red-500" />
+                        <BsCalendar2Date className="text-xl mr-2 text-red-500" />
                         <span className="text-lg font-semibold">
                           Registered date:
                         </span>{" "}
                         {user.date}
                       </div>
                       <div className="flex items-center mb-2">
-                        <MdVerifiedUser   className="text-xl mr-2 text-red-500" />
+                        <MdVerifiedUser className="text-xl mr-2 text-red-500" />
                         <span className="text-lg font-semibold">
                           User role:
                         </span>{" "}

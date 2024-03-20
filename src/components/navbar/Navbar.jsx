@@ -43,14 +43,18 @@ const Navbar = () => {
           )}
           {user?.role === "admin" && (
             <button onClick={() => navigate("/admin-dashboard")}>
-              Hey, {user.name}
+              <span className="mr-1">Admin Dashboard</span>
             </button>
           )}
           {user?.role === "user" && (
-            <button onClick={() => navigate("/user-dashboard")}>
-              Hey, {user.name}
+            <button
+              onClick={() => navigate("/user-dashboard")}
+              className="dashboard-button bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-50 text-white font-semibold py-2 px-4 rounded inline-flex items-center"
+            >
+              <span className="mr-1">User Dashboard</span>
             </button>
           )}
+
           {user && (
             <button
               onClick={logout}

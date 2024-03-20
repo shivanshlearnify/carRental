@@ -9,10 +9,19 @@ import MyState from "../../context/MyState";
 import MyContext from "../../context/MyContext";
 
 const Booking = () => {
+  const today = new Date().toISOString().split("T")[0];
   const user = JSON.parse(localStorage.getItem("users"));
   const [modal, setModal] = useState(false);
 
   const navigate = useNavigate();
+
+  const handleDropOffDate = (e) => {
+    if (new Date(e.target.value) < new Date(carInfo.pickTime)) {
+      toast.error("Please select a valid date");
+    } else {
+      setCarInfo({ ...carInfo, dropTime: e.target.value });
+    }
+  };
 
   const [carInfo, setCarInfo] = useState({
     carType: "",
@@ -167,6 +176,7 @@ const Booking = () => {
                   className="border-2 p-2 text-[#838383]"
                   type="date"
                   value={carInfo.pickTime}
+                  min={today}
                   onChange={(e) => {
                     setCarInfo({ ...carInfo, pickTime: e.target.value });
                   }}
@@ -180,9 +190,8 @@ const Booking = () => {
                   className="border-2 p-2 text-[#838383]"
                   type="date"
                   value={carInfo.dropTime}
-                  onChange={(e) => {
-                    setCarInfo({ ...carInfo, dropTime: e.target.value });
-                  }}
+                  min={today}
+                  onChange={handleDropOffDate}
                 />
               </div>
               <div className="flex flex-col w-[340px] justify-end font-semibold">
