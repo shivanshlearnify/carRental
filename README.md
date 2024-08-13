@@ -1,10 +1,10 @@
-# Car Rental Website
+# urbandrive Website
 
-Welcome to the Car Rental website project! This is a responsive web application built using React.js and Tailwind CSS. It allows users to rent cars conveniently and efficiently.
+Welcome to the UrbanDrive website project! This is a responsive web application built using React.js and Tailwind CSS. It allows users to rent cars conveniently and efficiently.
 
-live:- https://carreantal.netlify.app/
+live:- https://urbandrive.netlify.app/
 
-![image](https://github.com/shivanshlearnify/carRental/assets/128142418/2fc38b75-806f-4b85-af5d-d090cffede9a)
+![alt text](image.png)
 
 
 ## Features
@@ -27,4 +27,4 @@ To run this project locally, follow these steps:
 1. Clone the repository:
 
 
-git clone https://github.com/your-username/car-rental.git
+git clone https://github.com/shivanshlearnify/carRental.git
