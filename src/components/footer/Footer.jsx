@@ -1,37 +1,60 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
   const [email, setemail] = useState("");
+  const navigate = useNavigate();
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const handleChange = (e) => {
     setemail(e.target.value);
   };
 
   const handleToast = () => {
-    email === ""
-      ? toast.error("Please add a valid Email")
-      : toast.success(`Successfully Subscribed for ${email} Email`);
-    setemail("");
+    if (!emailRegex.test(email)) {
+      toast.error("Please add a valid Email");
+    } else {
+      email === ""
+        ? toast.error("Please add a Email to subscribe")
+        : toast.success(`Successfully Subscribed for ${email} Email`);
+      setemail("");
+    }
   };
   return (
     <div className="flex max-w-7xl m-auto px-3 py-[100px] gap-10 sm:flex-col">
       <ul className="w-1/4 flex flex-col gap-3 sm:w-full">
-        <li className=" text-xl font-bold">CAR Rental</li>
+        <li className=" text-xl font-bold">UrbanDrive</li>
         <li className="font-medium text-gray-500">
           We provide an extensive selection of vehicles tailored to suit all
           your driving requirements. Whatever your needs may be, we offer the
           ideal car to match them perfectly.
         </li>
         <li className="font-bold cursor-pointer">+91 7894561239</li>
-        <li className="font-bold cursor-pointer">lorem@gmail.com</li>
+        <li className="font-bold cursor-pointer">UrbanDrive@gmail.com</li>
       </ul>
       <ul className="w-1/4 flex flex-col gap-3 sm:w-full">
         <li className=" text-xl font-bold">Company</li>
         <li className="font-medium text-gray-500">Delhi, In</li>
-        <li className="font-medium text-gray-500">Careers</li>
-        <li className="font-medium text-gray-500">Blog</li>
-        <li className="font-medium text-gray-500">How we work</li>
+        <li
+          className="font-medium text-gray-500 cursor-pointer"
+          onClick={() => navigate("/contact")}
+        >
+          Careers
+        </li>
+        <li
+          className="font-medium text-gray-500 cursor-pointer"
+          onClick={() => navigate("/testimonial")}
+        >
+          Blog
+        </li>
+        <li
+          className="font-medium text-gray-500 cursor-pointer"
+          onClick={() => navigate("/contact")}
+        >
+          How we work
+        </li>
       </ul>
       <ul className="w-1/4 flex flex-col gap-3 sm:w-full">
         <li className=" text-xl font-bold">WORKING HOURS</li>

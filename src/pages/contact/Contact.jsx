@@ -51,7 +51,7 @@ const Contact = () => {
             <span className="font-bold">Phone:-</span>9876543210
           </p>
           <p className="text-gray-500">
-            <span className="font-bold">Email:-</span>lorem@gmail.com
+            <span className="font-bold">Email:-</span>UrbanDrive@gmail.com
           </p>
           <p className="text-gray-500">
             <span className="font-bold">Location:-</span>Delhi, In

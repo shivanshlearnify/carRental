@@ -19,7 +19,7 @@ const About = () => {
         />
         <div className="w-1/2 sm:w-full">
           <h1 className="text-3xl font-bold sm:text-center">
-            About Car Rental
+            About UrbanDrive
           </h1>
           <p className="font-medium text-gray-500 mt-5">
             Car Rental is your premier destination for convenient, reliable, and
