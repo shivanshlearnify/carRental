@@ -117,7 +117,7 @@ const SignIn = () => {
         >
           Login
         </button>
-        <div className="flex justify-between">
+        <div className="flex justify-between sm:flex-col sm:gap-4">
           <p className="font-semibold text-gray-700">
             Don't have an account?{" "}
             <span
@@ -141,7 +141,7 @@ const SignIn = () => {
           <h2 className="text-center text-xl font-bold text-gray-800">
             Login Credentials
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+          <div className="grid grid-cols-1 sm:grid-cols-1 gap-4 mt-4">
             <div className="bg-gray-100 rounded-lg p-4">
               <h2 className="text-lg font-semibold">User Credentials</h2>
               <p>Email - testuser1@gmail.com</p>

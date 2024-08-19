@@ -123,7 +123,7 @@ const Signup = () => {
         >
           Sign Up
         </button>
-        <div className="flex justify-between">
+        <div className="flex justify-between sm:flex-col sm:gap-2">
           <p className="font-semibold text-gray-700">
             Already have an account?{" "}
             <span
