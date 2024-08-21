@@ -29,6 +29,11 @@ const SignIn = () => {
         userLogin.email,
         userLogin.password
       );
+      if (!users?.user?.emailVerified) {
+        toast.error("Email not verified, Kindly check your email to Verify");
+        setLoading(false);
+        return;
+      }
       try {
         const q = query(
           collection(fireDB, "user"),

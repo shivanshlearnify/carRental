@@ -3,7 +3,10 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import MyContext from "../../context/MyContext";
 
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 import { auth, fireDB } from "../../firebase/FirebaseConfig";
 import { Timestamp, addDoc, collection } from "firebase/firestore";
 import Loader from "../../components/loader/Loader";
@@ -35,7 +38,10 @@ const Signup = () => {
         userSignup.email,
         userSignup.password
       );
-
+      let actionCodeSettings = {
+        url: "https://urbandrive.netlify.app"
+      }
+      const emailVerification = await sendEmailVerification(auth.currentUser , actionCodeSettings);
       //create user
       const user = {
         name: userSignup.name,
