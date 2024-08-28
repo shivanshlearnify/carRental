@@ -10,6 +10,7 @@ import {
   PhoneAuthProvider,
   multiFactor,
   PhoneMultiFactorGenerator,
+  getMultiFactorResolver,
 } from "firebase/auth";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { auth, fireDB } from "../../firebase/FirebaseConfig";
@@ -21,7 +22,10 @@ const SignIn = () => {
   const [verificationCode, setVerificationCode] = useState("");
   const [verificationId, setVerificationId] = useState("");
   const [isCodeSent, setIsCodeSent] = useState(false);
-
+  const [enroll, setEnroll] = useState(false);
+  const [previousError, setPreviousError] = useState(null);
+  
+  
   const useLoginFunction = async () => {
     if (userLogin.email === "" || userLogin.password === "") {
       toast.error("ALL Fields Are Required");
@@ -50,7 +54,6 @@ const SignIn = () => {
 
       const phoneInput = "+917895059555";
       console.log(auth);
-      
 
       const recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha", {
         size: "invisible",
@@ -77,13 +80,45 @@ const SignIn = () => {
       );
       setVerificationId(verificationId);
       setIsCodeSent(true);
+      setEnroll(true);
       recaptchaVerifier.clear();
 
       toast.success("Verification code sent to your phone.");
     } catch (error) {
       console.log(error);
       setLoading(false);
-      if (error.code === "auth/invalid-email") {
+      if (error.code == "auth/multi-factor-auth-required") {
+        // The user is a multi-factor user. Second factor challenge is required.
+        setPreviousError(error);
+        const resolver = getMultiFactorResolver(auth, error);
+
+        const recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha", {
+          size: "invisible",
+          callback: (response) => {
+            // console.log("Recaptcha solved", response);
+            return response;
+          },
+        });
+        const phoneInfoOptions = {
+          multiFactorHint: resolver.hints[0],
+          session: resolver.session,
+        };
+
+        const phoneAuthProvider = new PhoneAuthProvider(auth);
+
+        const verificationId = await phoneAuthProvider.verifyPhoneNumber(
+          phoneInfoOptions,
+          recaptchaVerifier
+        );
+
+        setVerificationId(verificationId);
+        setIsCodeSent(true);
+        recaptchaVerifier.clear();
+
+        toast.success("Verification code sent to your phone.");
+
+        // ...
+      } else if (error.code === "auth/invalid-email") {
         toast.error("Invalid email. Please provide a valid email address.");
       } else if (error.code === "auth/invalid-credential") {
         toast.error(
@@ -102,6 +137,7 @@ const SignIn = () => {
       toast.error("Please enter the verification code.");
       return;
     }
+    // console.log(verificationId, verificationCode);
 
     try {
       const cred = PhoneAuthProvider.credential(
@@ -109,13 +145,25 @@ const SignIn = () => {
         verificationCode
       );
       const multiFactorAssertion = PhoneMultiFactorGenerator.assertion(cred);
-
-      await multiFactor(auth.currentUser).enroll(
-        multiFactorAssertion,
-        "My personal phone number"
-      );
-
-      toast.success("MFA Enrolled Successfully");
+      
+      if (enroll) {
+        await multiFactor(auth.currentUser).enroll(
+          multiFactorAssertion,
+          "My personal phone number"
+        );
+        setEnroll(false);
+        toast.success("MFA Enrolled Successfully");
+      } else {
+        console.log(previousError);
+        const resolver = getMultiFactorResolver(auth, previousError);
+        console.log(resolver);
+        
+        const userCredential = await resolver.resolveSignIn(
+          multiFactorAssertion
+        );
+        console.log(userCredential);
+        toast.success("MFA Verified Successfully");
+      }
 
       // Continue with user session and navigation
       const q = query(
