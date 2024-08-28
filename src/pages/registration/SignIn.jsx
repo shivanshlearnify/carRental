@@ -49,6 +49,8 @@ const SignIn = () => {
       }
 
       const phoneInput = "+917895059555";
+      console.log(auth);
+      
 
       const recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha", {
         size: "invisible",
