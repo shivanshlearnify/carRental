@@ -41,7 +41,12 @@ const Signup = () => {
       let actionCodeSettings = {
         url: "https://urbandrive.netlify.app"
       }
-      const emailVerification = await sendEmailVerification(auth.currentUser , actionCodeSettings);
+
+      // sending emailVerification
+      
+      await sendEmailVerification(auth.currentUser , actionCodeSettings);
+
+
       //create user
       const user = {
         name: userSignup.name,
@@ -55,6 +60,7 @@ const Signup = () => {
           year: "numeric",
         }),
       };
+
       // create user Refrence
       const userRefrence = collection(fireDB, "user");
 

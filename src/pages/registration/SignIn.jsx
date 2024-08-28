@@ -1,71 +1,83 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 import Loader from "../../components/loader/Loader";
 import MyContext from "../../context/MyContext";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  RecaptchaVerifier,
+  PhoneAuthProvider,
+  multiFactor,
+  PhoneMultiFactorGenerator,
+} from "firebase/auth";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { auth, fireDB } from "../../firebase/FirebaseConfig";
 
 const SignIn = () => {
   const navigate = useNavigate();
-
   const { loading, setLoading } = useContext(MyContext);
-
-  const [userLogin, setUserLogin] = useState({
-    email: "",
-    password: "",
-  });
+  const [userLogin, setUserLogin] = useState({ email: "", password: "" });
+  const [verificationCode, setVerificationCode] = useState("");
+  const [verificationId, setVerificationId] = useState("");
+  const [isCodeSent, setIsCodeSent] = useState(false);
 
   const useLoginFunction = async () => {
     if (userLogin.email === "" || userLogin.password === "") {
-      toast.error("ALL Feilds Are Required");
+      toast.error("ALL Fields Are Required");
+      return;
     }
     setLoading(true);
+
     try {
-      const users = await signInWithEmailAndPassword(
+      // signing the user
+      // throw new Error("some error")
+
+      const userCredential = await signInWithEmailAndPassword(
         auth,
         userLogin.email,
         userLogin.password
       );
-      try {
-        const q = query(
-          collection(fireDB, "user"),
-          where("uid", "==", users?.user?.uid)
-        );
-        const data = onSnapshot(q, (QuerySnapshot) => {
-          let user;
-          QuerySnapshot.forEach((doc) => (user = doc.data()));
-          localStorage.setItem("users", JSON.stringify(user));
-          setUserLogin({
-            email: "",
-            password: "",
-          });
-          toast.success("Login Successfully");
-          setLoading(false);
-          if (user.role === "user") {
-            navigate("/user-dashboard");
-          } else {
-            navigate("/admin-dashboard");
-          }
-        });
-        return () => data;
-      } catch (error) {
-        console.log(error);
-        if (error.code === "auth/invalid-email") {
-          toast.error("Invalid email. Please provide a valid email address.");
-        } else if (error.code === "auth/invalid-credential") {
-          toast.error(
-            "Invalid email or Password . Please provide a valid email address."
-          );
-        } else {
-          toast.error(
-            "An error occurred while signing in. Please try again later."
-          );
-        }
+
+      // checking Email verification
+
+      const user = userCredential.user;
+      if (!user.emailVerified) {
+        toast.error("Email not verified, Kindly check your email to Verify");
         setLoading(false);
+        return;
       }
+
+      const phoneInput = "+917895059555";
+
+      const recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha", {
+        size: "invisible",
+        callback: (response) => {
+          // console.log("Recaptcha solved", response);
+          return response;
+        },
+      });
+
+      // Get Multi-Factor session
+      const multiFactorSession = await multiFactor(user).getSession();
+
+      // Setup Phone Number Verification
+      const phoneInfoOptions = {
+        phoneNumber: phoneInput,
+        session: multiFactorSession,
+      };
+
+      const phoneAuthProvider = new PhoneAuthProvider(auth);
+
+      const verificationId = await phoneAuthProvider.verifyPhoneNumber(
+        phoneInfoOptions,
+        recaptchaVerifier
+      );
+      setVerificationId(verificationId);
+      setIsCodeSent(true);
+      recaptchaVerifier.clear();
+
+      toast.success("Verification code sent to your phone.");
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -73,13 +85,61 @@ const SignIn = () => {
         toast.error("Invalid email. Please provide a valid email address.");
       } else if (error.code === "auth/invalid-credential") {
         toast.error(
-          "Invalid email or Password . Please provide a valid email address."
+          "Invalid email or Password. Please provide a valid email address."
         );
       } else {
         toast.error(
           "An error occurred while signing in. Please try again later."
         );
       }
+    }
+  };
+
+  const handleVerificationCodeSubmit = async () => {
+    if (verificationCode === "") {
+      toast.error("Please enter the verification code.");
+      return;
+    }
+
+    try {
+      const cred = PhoneAuthProvider.credential(
+        verificationId,
+        verificationCode
+      );
+      const multiFactorAssertion = PhoneMultiFactorGenerator.assertion(cred);
+
+      await multiFactor(auth.currentUser).enroll(
+        multiFactorAssertion,
+        "My personal phone number"
+      );
+
+      toast.success("MFA Enrolled Successfully");
+
+      // Continue with user session and navigation
+      const q = query(
+        collection(fireDB, "user"),
+        where("uid", "==", auth.currentUser.uid)
+      );
+
+      const data = onSnapshot(q, (QuerySnapshot) => {
+        let userData;
+        QuerySnapshot.forEach((doc) => (userData = doc.data()));
+        localStorage.setItem("users", JSON.stringify(userData));
+        setUserLogin({ email: "", password: "" });
+        setLoading(false);
+
+        if (userData.role === "user") {
+          navigate("/user-dashboard");
+        } else {
+          navigate("/admin-dashboard");
+        }
+      });
+
+      return () => data;
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+      toast.error("Failed to verify the code. Please try again.");
     }
   };
 
@@ -109,15 +169,24 @@ const SignIn = () => {
               setUserLogin({ ...userLogin, password: e.target.value })
             }
           />
+          {isCodeSent && (
+            <input
+              className="rounded-lg px-4 py-3 text-lg focus:outline-none bg-gray-100 border border-gray-300"
+              type="text"
+              placeholder="Verification Code"
+              value={verificationCode}
+              onChange={(e) => setVerificationCode(e.target.value)}
+            />
+          )}
         </div>
-
         <button
-          onClick={useLoginFunction}
+          onClick={isCodeSent ? handleVerificationCodeSubmit : useLoginFunction}
           className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg text-xl font-semibold transition duration-300 ease-in-out my-4"
         >
-          Login
+          {isCodeSent ? "Submit Code" : "Login"}
         </button>
-        <div className="flex justify-between">
+        <div id="recaptcha"></div> {/* Recaptcha container */}
+        <div className="flex justify-between sm:flex-col sm:gap-4">
           <p className="font-semibold text-gray-700">
             Don't have an account?{" "}
             <span
@@ -141,7 +210,7 @@ const SignIn = () => {
           <h2 className="text-center text-xl font-bold text-gray-800">
             Login Credentials
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+          <div className="grid grid-cols-1 sm:grid-cols-1 gap-4 mt-4">
             <div className="bg-gray-100 rounded-lg p-4">
               <h2 className="text-lg font-semibold">User Credentials</h2>
               <p>Email - testuser1@gmail.com</p>
