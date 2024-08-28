@@ -28,62 +28,64 @@ const SignIn = () => {
       return;
     }
     setLoading(true);
-  
+
     try {
+      // signing the user
+      // throw new Error("some error")
+
       const userCredential = await signInWithEmailAndPassword(
         auth,
         userLogin.email,
         userLogin.password
       );
-  
+
+      // checking Email verification
+
       const user = userCredential.user;
-  
       if (!user.emailVerified) {
         toast.error("Email not verified, Kindly check your email to Verify");
         setLoading(false);
         return;
       }
-  
-      if (multiFactor(user).enrolledFactors.length > 0) {
-        // User is enrolled in MFA, so we need to trigger MFA flow
-        const recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha", {
-          size: "invisible",
-          callback: (response) => {
-            return response;
-          },
-        });
-  
-        // Get Multi-Factor session
-        const multiFactorSession = await multiFactor(user).getSession();
-  
-        // Setup Phone Number Verification
-        const phoneInfoOptions = {
-          phoneNumber: "+917895059555", // Replace with the user's phone number
-          session: multiFactorSession,
-        };
-  
-        const phoneAuthProvider = new PhoneAuthProvider(auth);
-  
-        const verificationId = await phoneAuthProvider.verifyPhoneNumber(
-          phoneInfoOptions,
-          recaptchaVerifier
-        );
-        setVerificationId(verificationId);
-        setIsCodeSent(true);
-        recaptchaVerifier.clear();
-        toast.success("Verification code sent to your phone.");
-      } else {
-        // User does not require MFA, proceed to next steps
-        navigateUserToDashboard(user);
-      }
+
+      const phoneInput = "+917895059555";
+
+      const recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha", {
+        size: "invisible",
+        callback: (response) => {
+          // console.log("Recaptcha solved", response);
+          return response;
+        },
+      });
+
+      // Get Multi-Factor session
+      const multiFactorSession = await multiFactor(user).getSession();
+
+      // Setup Phone Number Verification
+      const phoneInfoOptions = {
+        phoneNumber: phoneInput,
+        session: multiFactorSession,
+      };
+
+      const phoneAuthProvider = new PhoneAuthProvider(auth);
+
+      const verificationId = await phoneAuthProvider.verifyPhoneNumber(
+        phoneInfoOptions,
+        recaptchaVerifier
+      );
+      setVerificationId(verificationId);
+      setIsCodeSent(true);
+      recaptchaVerifier.clear();
+
+      toast.success("Verification code sent to your phone.");
     } catch (error) {
       console.log(error);
       setLoading(false);
-  
-      if (error.code === "auth/multi-factor-auth-required") {
-        // MFA required error caught here
+      if (error.code === "auth/invalid-email") {
+        toast.error("Invalid email. Please provide a valid email address.");
+      } else if (error.code === "auth/invalid-credential") {
         toast.error(
-          "Multi-factor authentication required. Please enter the verification code sent to your phone."
+          "Invalid email or Password. Please provide a valid email address."
         );
       } else {
         toast.error(
@@ -92,30 +94,6 @@ const SignIn = () => {
       }
     }
   };
-  
-  const navigateUserToDashboard = (user) => {
-    const q = query(
-      collection(fireDB, "user"),
-      where("uid", "==", user.uid)
-    );
-  
-    const data = onSnapshot(q, (QuerySnapshot) => {
-      let userData;
-      QuerySnapshot.forEach((doc) => (userData = doc.data()));
-      localStorage.setItem("users", JSON.stringify(userData));
-      setUserLogin({ email: "", password: "" });
-      setLoading(false);
-  
-      if (userData.role === "user") {
-        navigate("/user-dashboard");
-      } else {
-        navigate("/admin-dashboard");
-      }
-    });
-  
-    return () => data;
-  };
-  
 
   const handleVerificationCodeSubmit = async () => {
     if (verificationCode === "") {
