@@ -1,4 +1,3 @@
-import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Layout from "../../components/layout/Layout";
 import MyContext from "../../context/MyContext";
@@ -9,17 +8,113 @@ import {
   FaCalendarAlt,
   FaCheckCircle,
 } from "react-icons/fa";
+import { auth } from "../../firebase/FirebaseConfig";
+import { PhoneMultiFactorGenerator, RecaptchaVerifier } from "firebase/auth";
+import { multiFactor, PhoneAuthProvider } from "firebase/auth";
+import toast from "react-hot-toast";
+import { useContext, useState } from "react";
 
 const UserDashboard = () => {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("users"));
-
   const context = useContext(MyContext);
   const { loading, bookingInfo } = context;
   const bookingData = bookingInfo.filter((obj) => obj?.userid === user?.uid);
+  const [verificationId, setVerificationId] = useState("");
+  const [verificationCode, setVerificationCode] = useState("");
+  const [isCodeSent, setIsCodeSent] = useState(false);
+
+  const userauth = auth.currentUser;
+
+  const handleMfa = async () => {
+    toast.success("Verification code is generating.");
+    const recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha", {
+      size: "invisible",
+      callback: (response) => {
+        return response;
+      },
+    });
+    try {
+      // Get Multi-Factor session
+      const multiFactorSession = await multiFactor(userauth).getSession();
+
+      // Setup Phone Number Verification
+      const phoneInfoOptions = {
+        phoneNumber: "+917895059555",
+        session: multiFactorSession,
+      };
+
+      const phoneAuthProvider = new PhoneAuthProvider(auth);
+      const verificationId = await phoneAuthProvider.verifyPhoneNumber(
+        phoneInfoOptions,
+        recaptchaVerifier
+      );
+
+      setVerificationId(verificationId);
+      setIsCodeSent(true);
+      toast.success("Verification code sent to your phone.");
+
+      recaptchaVerifier.clear();
+    } catch (error) {
+      if (error.code == "auth/second-factor-already-in-use") {
+        toast.error("user already enrolled");
+      } else {
+        toast.error(
+          "Failed to send verification code. Please try again.     " + error
+        );
+      }
+      recaptchaVerifier.clear();
+    }
+  };
+
+  const handleRemoveMfa = async () => {
+    try {
+      toast.success("MFA factor is getting removed.");
+      await userauth.reload();
+      const mfaInfo = multiFactor(userauth).enrolledFactors;
+      const factorToRemove = mfaInfo.find(
+        (factor) => factor.displayName === "My personal phone number"
+      );
+
+      if (factorToRemove) {
+        await multiFactor(userauth).unenroll(factorToRemove);
+        toast.success("MFA factor removed successfully.");
+      } else {
+        toast.success("No matching MFA factor found.");
+      }
+    } catch (error) {
+      toast.error("Error removing MFA factor:", error);
+    }
+  };
+
+  const handleSubmit = async () => {
+    if (verificationCode === "") {
+      toast.error("Please enter the verification code.");
+      return;
+    }
+
+    try {
+      const cred = PhoneAuthProvider.credential(
+        verificationId,
+        verificationCode
+      );
+      const multiFactorAssertion = PhoneMultiFactorGenerator.assertion(cred);
+
+      await multiFactor(auth.currentUser).enroll(
+        multiFactorAssertion,
+        "My personal phone number"
+      );
+      toast.success("MFA Enrolled Successfully");
+      setIsCodeSent(false);
+    } catch (error) {
+      toast.error("Failed to verify the code. Please try again.");
+    }
+  };
+
   return (
     <Layout>
       <div>
+        <div id="recaptcha"></div>
         <div className="bg-[#ff4c306c] text-xl font-bold flex flex-col gap-4 mt-[150px] justify-center items-center max-w-7xl mx-auto rounded-3xl py-16 sm:mx-2 shadow-md">
           <img
             className="w-[120px] self-center"
@@ -32,6 +127,27 @@ const UserDashboard = () => {
           <h2 className="text-center text-2xl">
             Email: <span className="text-white">{user.email}</span>
           </h2>
+          <button className="bg-white p-2 rounded-2xl" onClick={handleMfa}>
+            Add MFA
+          </button>
+          <button
+            className="bg-white p-2 rounded-2xl"
+            onClick={handleRemoveMfa}
+          >
+            Remove MFA
+          </button>
+          {isCodeSent && (
+            <>
+              <input
+                className="rounded-lg px-4 py-3 text-lg focus:outline-none bg-gray-100 border border-gray-300"
+                type="text"
+                placeholder="Verification Code"
+                value={verificationCode}
+                onChange={(e) => setVerificationCode(e.target.value)}
+              />
+              <button onClick={handleSubmit}>Submit</button>
+            </>
+          )}
         </div>
       </div>
       <div className="max-w-7xl mx-auto sm:mx-5">
@@ -105,10 +221,10 @@ const UserDashboard = () => {
               </div>
               <div className="flex items-center">
                 <span className="text-lg font-semibold mr-2">
-                  Booking Confirmation: 
+                  Booking Confirmation:
                 </span>
 
-                <FaCheckCircle className="text-green-500" /> 
+                <FaCheckCircle className="text-green-500" />
                 <p>Confirmed</p>
               </div>
             </div>

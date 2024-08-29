@@ -24,8 +24,7 @@ const SignIn = () => {
   const [isCodeSent, setIsCodeSent] = useState(false);
   const [enroll, setEnroll] = useState(false);
   const [previousError, setPreviousError] = useState(null);
-  
-  
+
   const useLoginFunction = async () => {
     if (userLogin.email === "" || userLogin.password === "") {
       toast.error("ALL Fields Are Required");
@@ -34,58 +33,41 @@ const SignIn = () => {
     setLoading(true);
 
     try {
-      // signing the user
-      // throw new Error("some error")
-
       const userCredential = await signInWithEmailAndPassword(
         auth,
         userLogin.email,
         userLogin.password
       );
 
-      // checking Email verification
-
       const user = userCredential.user;
+
       if (!user.emailVerified) {
         toast.error("Email not verified, Kindly check your email to Verify");
         setLoading(false);
         return;
       }
-
-      const phoneInput = "+917895059555";
-      console.log(auth);
-
-      const recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha", {
-        size: "invisible",
-        callback: (response) => {
-          // console.log("Recaptcha solved", response);
-          return response;
-        },
-      });
-
-      // Get Multi-Factor session
-      const multiFactorSession = await multiFactor(user).getSession();
-
-      // Setup Phone Number Verification
-      const phoneInfoOptions = {
-        phoneNumber: phoneInput,
-        session: multiFactorSession,
-      };
-
-      const phoneAuthProvider = new PhoneAuthProvider(auth);
-
-      const verificationId = await phoneAuthProvider.verifyPhoneNumber(
-        phoneInfoOptions,
-        recaptchaVerifier
+      const q = query(
+        collection(fireDB, "user"),
+        where("uid", "==", userCredential?.user?.uid)
       );
-      setVerificationId(verificationId);
-      setIsCodeSent(true);
-      setEnroll(true);
-      recaptchaVerifier.clear();
-
-      toast.success("Verification code sent to your phone.");
+      const data = onSnapshot(q, (QuerySnapshot) => {
+        let user;
+        QuerySnapshot.forEach((doc) => (user = doc.data()));
+        localStorage.setItem("users", JSON.stringify(user));
+        setUserLogin({
+          email: "",
+          password: "",
+        });
+        toast.success("Login Successfully");
+        setLoading(false);
+        if (user.role === "user") {
+          navigate("/user-dashboard");
+        } else {
+          navigate("/admin-dashboard");
+        }
+      });
+      return () => data;
     } catch (error) {
-      console.log(error);
       setLoading(false);
       if (error.code == "auth/multi-factor-auth-required") {
         // The user is a multi-factor user. Second factor challenge is required.
@@ -95,7 +77,6 @@ const SignIn = () => {
         const recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha", {
           size: "invisible",
           callback: (response) => {
-            // console.log("Recaptcha solved", response);
             return response;
           },
         });
@@ -116,8 +97,6 @@ const SignIn = () => {
         recaptchaVerifier.clear();
 
         toast.success("Verification code sent to your phone.");
-
-        // ...
       } else if (error.code === "auth/invalid-email") {
         toast.error("Invalid email. Please provide a valid email address.");
       } else if (error.code === "auth/invalid-credential") {
@@ -130,6 +109,7 @@ const SignIn = () => {
         );
       }
     }
+    setLoading(false);
   };
 
   const handleVerificationCodeSubmit = async () => {
@@ -137,7 +117,6 @@ const SignIn = () => {
       toast.error("Please enter the verification code.");
       return;
     }
-    // console.log(verificationId, verificationCode);
 
     try {
       const cred = PhoneAuthProvider.credential(
@@ -145,7 +124,7 @@ const SignIn = () => {
         verificationCode
       );
       const multiFactorAssertion = PhoneMultiFactorGenerator.assertion(cred);
-      
+
       if (enroll) {
         await multiFactor(auth.currentUser).enroll(
           multiFactorAssertion,
@@ -154,14 +133,12 @@ const SignIn = () => {
         setEnroll(false);
         toast.success("MFA Enrolled Successfully");
       } else {
-        console.log(previousError);
         const resolver = getMultiFactorResolver(auth, previousError);
-        console.log(resolver);
-        
+
         const userCredential = await resolver.resolveSignIn(
           multiFactorAssertion
         );
-        console.log(userCredential);
+
         toast.success("MFA Verified Successfully");
       }
 
@@ -174,6 +151,7 @@ const SignIn = () => {
       const data = onSnapshot(q, (QuerySnapshot) => {
         let userData;
         QuerySnapshot.forEach((doc) => (userData = doc.data()));
+
         localStorage.setItem("users", JSON.stringify(userData));
         setUserLogin({ email: "", password: "" });
         setLoading(false);
@@ -187,7 +165,6 @@ const SignIn = () => {
 
       return () => data;
     } catch (error) {
-      console.log(error);
       setLoading(false);
       toast.error("Failed to verify the code. Please try again.");
     }
@@ -235,7 +212,7 @@ const SignIn = () => {
         >
           {isCodeSent ? "Submit Code" : "Login"}
         </button>
-        <div id="recaptcha"></div> {/* Recaptcha container */}
+        <div id="recaptcha"></div> 
         <div className="flex justify-between sm:flex-col sm:gap-4">
           <p className="font-semibold text-gray-700">
             Don't have an account?{" "}
